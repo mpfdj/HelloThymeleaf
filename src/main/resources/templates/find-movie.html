@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Taming Thymeleaf</title>
+</head>
+<body>
+<h1>
+    <a th:href="@{/}">[ home ]</a>
+    Find a movie
+</h1>
+<div>
+    <form action="#" th:action="@{/findMovie}" th:object="${movieObj}" method="post">
+        <input type="text" id="title" name="title" th:value="${title}">
+        <button type="submit">find</button>
+    </form>
+</div>
+</body>
+</html>
