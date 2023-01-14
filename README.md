@@ -10,7 +10,17 @@ https://github.com/eugenp/tutorials/tree/master/spring-web-modules/spring-thymel
 https://www.geeksforgeeks.org/spring-boot-thymeleaf-with-example/
 https://github.com/wimdeblauwe/taming-thymeleaf-sources
 
+# Thymeleaf layouts / fragments
+https://www.thymeleaf.org/doc/articles/layouts.html
+https://o7planning.org/12369/thymeleaf-page-layout#a40053228
 
+
+# thymeleaf.org
+# 4 Standard Expression Syntax
+https://www.thymeleaf.org/doc/tutorials/3.1/usingthymeleaf.html
+
+
+# Configure live-coding
 https://stackoverflow.com/questions/51165677/how-to-use-live-edit-in-a-spring-boot-project-in-intellij
 Rebuild the project to test the new changes (the server is automatically being restarted)
 
