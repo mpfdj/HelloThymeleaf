@@ -1,3 +1,8 @@
+# The Movie database
+https://www.themoviedb.org/settings/api
+https://developers.themoviedb.org/3/authentication/how-do-i-generate-a-session-id
+
+
 # Thymeleaf cheatsheet
 https://github.com/engma/thymeleaf-cheat-sheet
 https://github.com/ultraq/thymeleaf-layout-dialect
@@ -54,3 +59,7 @@ Spring Boot WebFlux | Reactive Streams Specification and work flow | Project Rea
 https://www.youtube.com/watch?v=A5nCPqPH3Fc
 Spring Boot - Introduction to Reactive Programming | JavaTechie
 
+
+# TheMovieDB - How do I load a poster?
+https://www.themoviedb.org/talk/5f3ef4eec175b200365ee352
+https://image.tmdb.org/t/p/original/coJVIUEOToAEGViuhclM7pXC75R.jpg

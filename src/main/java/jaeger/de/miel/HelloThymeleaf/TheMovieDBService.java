@@ -25,10 +25,18 @@ public class TheMovieDBService {
     }
 
     public Mono<GenresResponse> listMovieGenres() {
+        System.out.println("calling listMovieGenres WebClient....");
         return this.webClient
                 .get()
                 .uri("/genre/movie/list?api_key=" + api_key)
-                .retrieve().bodyToMono(GenresResponse.class).log();
+                .retrieve().bodyToMono(GenresResponse.class);
+
+//        With logging
+//        return this.webClient
+//                .get()
+//                .uri("/genre/movie/list?api_key=" + api_key)
+//                .retrieve().bodyToMono(GenresResponse.class)
+//                .log();
     }
 
     @PostConstruct

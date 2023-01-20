@@ -1,6 +1,8 @@
 package jaeger.de.miel.HelloThymeleaf;
 
 import jaeger.de.miel.HelloThymeleaf.model.entities.MovieObj;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +16,16 @@ import java.util.List;
 @RequestMapping("/")
 public class IndexController {
 
+    @Autowired
+    private TheMovieDBDelegate movieDBDelegate;
+
+    @Autowired
+    private ApplicationContext context;
+
     @GetMapping
+
     public String index(Model model) {
+
         model.addAttribute("pageTitle", "Taming Thymeleaf");
         model.addAttribute("scientists", List.of("Albert Einstein",
                 "Niels Bohr",
@@ -41,15 +51,13 @@ public class IndexController {
         return "list-movie-genres";
     }
 
-
-
-
-
     @PostMapping("findMovie")
     public String findMoviePost(@ModelAttribute MovieObj movieObj, Model model) {
         System.out.println("calling findMovie");
         System.out.println(movieObj);
         model.addAttribute("title", movieObj.getTitle());
+
+
 
         return "find-movie";
     }
@@ -57,6 +65,15 @@ public class IndexController {
     @PostMapping("listMovieGenres")
     public String listMovieGenresPost(Model model) {
         System.out.println("calling listMovieGenres");
+//        model.addAttribute("movieGenres", movieDBDelegate.listMovieGenres());
+
+
+        List<String> genresTest = (List<String>) context.getBean("testWithSingleton");
+        model.addAttribute("movieGenres", genresTest);
+
+
+
+
         return "list-movie-genres";
     }
 
