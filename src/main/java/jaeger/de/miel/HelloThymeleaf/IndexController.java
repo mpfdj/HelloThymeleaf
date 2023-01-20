@@ -20,6 +20,8 @@ public class IndexController {
     private TheMovieDBDelegate movieDBDelegate;
 
     @Autowired
+    private TestRepositoryBean testRepositoryBean;
+    @Autowired
     private ApplicationContext context;
 
     @GetMapping
@@ -58,7 +60,6 @@ public class IndexController {
         model.addAttribute("title", movieObj.getTitle());
 
 
-
         return "find-movie";
     }
 
@@ -68,9 +69,9 @@ public class IndexController {
 //        model.addAttribute("movieGenres", movieDBDelegate.listMovieGenres());
 
 
-        List<String> genresTest = (List<String>) context.getBean("testWithSingleton");
-        model.addAttribute("movieGenres", genresTest);
+//        model.addAttribute("movieGenres", (List<String>) context.getBean("testWithSingleton"));
 
+        model.addAttribute("movieGenres", testRepositoryBean.getGenres());
 
 
 
