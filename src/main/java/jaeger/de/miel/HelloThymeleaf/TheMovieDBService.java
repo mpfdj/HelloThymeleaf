@@ -1,6 +1,7 @@
 package jaeger.de.miel.HelloThymeleaf;
 
 import jaeger.de.miel.HelloThymeleaf.model.org.themoviedb.genre.movie.GenresResponse;
+import jaeger.de.miel.HelloThymeleaf.model.org.themoviedb.lists.getdetails.ListResponse;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -37,6 +38,14 @@ public class TheMovieDBService {
 //                .uri("/genre/movie/list?api_key=" + api_key)
 //                .retrieve().bodyToMono(GenresResponse.class)
 //                .log();
+    }
+
+    public Mono<ListResponse> listTheMarvelUniverse() {
+        System.out.println("calling listTheMarvelUniverse WebClient");
+        return this.webClient
+                .get()
+                .uri("/list/1?api_key=" + api_key)
+                .retrieve().bodyToMono(ListResponse.class);
     }
 
     @PostConstruct

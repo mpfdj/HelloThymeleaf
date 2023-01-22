@@ -63,3 +63,7 @@ Spring Boot - Introduction to Reactive Programming | JavaTechie
 # TheMovieDB - How do I load a poster?
 https://www.themoviedb.org/talk/5f3ef4eec175b200365ee352
 https://image.tmdb.org/t/p/original/coJVIUEOToAEGViuhclM7pXC75R.jpg
+
+
+# DTO pattern
+https://www.baeldung.com/java-dto-pattern

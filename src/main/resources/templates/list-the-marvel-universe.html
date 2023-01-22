@@ -10,11 +10,22 @@
 <h1>
     <a th:href="@{/}">[ home ]</a>
     List the Marvel universe
+
+
+
 </h1>
 <div>
-    <form action="#" th:action="@{/listMarvelUniverse}" th:object="${model}" method="post">
-        <button type="submit">list</button>
-    </form>
+<!--    <form action="#" th:action="@{/listMarvelUniverse}" th:object="${model}" method="post">-->
+<!--        <button type="submit">list</button>-->
+<!--    </form>-->
+
+    <ul>
+        <li th:each="u : ${theMarvelUniverse}">
+            <span th:text="${u.originalTitle}"></span>
+        </li>
+    </ul>
+
+
 </div>
 </body>
 </html>

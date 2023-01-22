@@ -17,10 +17,8 @@ import java.util.List;
 public class IndexController {
 
     @Autowired
-    private TheMovieDBDelegate movieDBDelegate;
+    private TheMovieDBDelegate theMovieDBDelegate;
 
-    @Autowired
-    private TestRepositoryBean testRepositoryBean;
     @Autowired
     private ApplicationContext context;
 
@@ -45,6 +43,7 @@ public class IndexController {
 
     @GetMapping("list-the-marvel-universe")
     public String listTheMarvelUniverseGet(Model model) {
+        model.addAttribute("theMarvelUniverse", theMovieDBDelegate.listTheMarvelUniverse());
         return "list-the-marvel-universe";
     }
 
@@ -69,9 +68,8 @@ public class IndexController {
 //        model.addAttribute("movieGenres", movieDBDelegate.listMovieGenres());
 
 
-//        model.addAttribute("movieGenres", (List<String>) context.getBean("testWithSingleton"));
-
-        model.addAttribute("movieGenres", testRepositoryBean.getGenres());
+        model.addAttribute("movieGenres", (List<String>) context.getBean("testWithSingleton"));
+//
 
 
 
