@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @Data
 public class TheMarvelUniverseObj {
     private String originalTitle;
-    private float popularity;
+    private BigDecimal popularity;
     private String posterPath;
     private LocalDate releaseDate;
     private int voteAverage;

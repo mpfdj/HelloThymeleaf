@@ -10,10 +10,9 @@
 <h1>
     <a th:href="@{/}">[ home ]</a>
     List the Marvel universe
-
-
-
 </h1>
+<a th:href="@{/list-the-marvel-universe(action='sort-by-title')}">[sort by title]</a>
+<a th:href="@{/list-the-marvel-universe(action='sort-by-popularity')}">[sort by popularity]</a>
 <div>
 <!--    <form action="#" th:action="@{/listMarvelUniverse}" th:object="${model}" method="post">-->
 <!--        <button type="submit">list</button>-->
@@ -21,7 +20,7 @@
 
     <ul>
         <li th:each="u : ${theMarvelUniverse}">
-            <span th:text="${u.originalTitle}"></span>
+            <span th:text="${u.originalTitle} + ' ' + ${u.popularity}"></span>
         </li>
     </ul>
 

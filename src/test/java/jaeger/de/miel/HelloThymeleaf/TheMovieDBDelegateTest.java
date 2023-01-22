@@ -18,10 +18,10 @@ class TheMovieDBDelegateTest {
 
     @Autowired
     private TheMovieDBDelegate movieDBDelegate;
-    
+
     @Test
     void listTheMarvelUniverse() {
-        List<TheMarvelUniverseObj> listTheMarvelUniverse = movieDBDelegate.listTheMarvelUniverse();
+        List<TheMarvelUniverseObj> listTheMarvelUniverse = movieDBDelegate.listTheMarvelUniverseByTitle();
         System.out.println(listTheMarvelUniverse);
     }
 

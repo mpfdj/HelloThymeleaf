@@ -1,14 +1,12 @@
 package jaeger.de.miel.HelloThymeleaf;
 
 import jaeger.de.miel.HelloThymeleaf.model.entities.MovieObj;
+import jaeger.de.miel.HelloThymeleaf.model.entities.TheMarvelUniverseObj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,8 +40,27 @@ public class IndexController {
     }
 
     @GetMapping("list-the-marvel-universe")
-    public String listTheMarvelUniverseGet(Model model) {
-        model.addAttribute("theMarvelUniverse", theMovieDBDelegate.listTheMarvelUniverse());
+    public String listTheMarvelUniverseGet(
+            @RequestParam(value = "action", defaultValue = "sort-by-title") String action,
+            Model model) {
+
+        System.out.println("action is: " + action);
+
+        List<TheMarvelUniverseObj> theMarvelUniverse;
+
+        switch (action) {
+            case "sort-by-title":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByTitle();
+                break;
+            case "sort-by-popularity":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByPopularity();
+                break;
+            default:
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByTitle();
+        }
+
+        model.addAttribute("theMarvelUniverse", theMarvelUniverse);
+
         return "list-the-marvel-universe";
     }
 
@@ -70,7 +87,6 @@ public class IndexController {
 
         model.addAttribute("movieGenres", (List<String>) context.getBean("testWithSingleton"));
 //
-
 
 
         return "list-movie-genres";
