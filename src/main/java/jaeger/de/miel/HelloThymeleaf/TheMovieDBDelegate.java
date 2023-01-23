@@ -1,14 +1,13 @@
 package jaeger.de.miel.HelloThymeleaf;
 
-import jaeger.de.miel.HelloThymeleaf.mappers.TheMarvelUniverseMapper;
-import jaeger.de.miel.HelloThymeleaf.model.entities.TheMarvelUniverseObj;
+import jaeger.de.miel.HelloThymeleaf.model.dto.TheMarvelUniverseDTO;
 import jaeger.de.miel.HelloThymeleaf.model.org.themoviedb.genre.movie.Genre;
-import jaeger.de.miel.HelloThymeleaf.model.org.themoviedb.lists.getdetails.Item;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,12 +20,12 @@ public class TheMovieDBDelegate {
     @Autowired
     private TheMovieDBService theMovieDBService;
 
-    private List<TheMarvelUniverseObj> theMarvelUniverseObjList;
+    private List<TheMarvelUniverseDTO> theMarvelUniverseDTOList;
 
 
     @PostConstruct
     public void postConstruct() {
-        theMarvelUniverseObjList = (List<TheMarvelUniverseObj>) context.getBean("getTheMarveUniverseObjListSingleton");
+        theMarvelUniverseDTOList = (List<TheMarvelUniverseDTO>) context.getBean("getTheMarveUniverseObjListSingleton");
     }
 
     public List<String> listMovieGenres() {
@@ -39,14 +38,42 @@ public class TheMovieDBDelegate {
         return result;
     }
 
-    public List<TheMarvelUniverseObj> listTheMarvelUniverseByTitle() {
-        theMarvelUniverseObjList.sort((obj1, obj2) -> obj1.getOriginalTitle().compareTo(obj2.getOriginalTitle()));
-        return theMarvelUniverseObjList;
+    public List<TheMarvelUniverseDTO> listTheMarvelUniverseByTitle() {
+        // Sorting on a Collections API
+        theMarvelUniverseDTOList.sort((obj1, obj2) -> obj1.getOriginalTitle().compareTo(obj2.getOriginalTitle()));
+        return theMarvelUniverseDTOList;
     }
 
-    public List<TheMarvelUniverseObj> listTheMarvelUniverseByPopularity() {
-        theMarvelUniverseObjList.sort((obj1, obj2)-> obj2.getPopularity().compareTo(obj1.getPopularity()));
-        return theMarvelUniverseObjList;
+    public List<TheMarvelUniverseDTO> listTheMarvelUniverseByPopularity() {
+        // Sorting using stream API
+        List<TheMarvelUniverseDTO> result = theMarvelUniverseDTOList.stream()
+                .sorted(Comparator.comparing(TheMarvelUniverseDTO::getPopularity).reversed())
+                .collect(Collectors.toList());
+        return result;
+
+//        theMarvelUniverseDTOList.sort((obj1, obj2) -> obj2.getPopularity().compareTo(obj1.getPopularity()));
+//        return theMarvelUniverseDTOList;
+    }
+
+    public List<TheMarvelUniverseDTO> listTheMarvelUniverseByReleaseDate() {
+        List<TheMarvelUniverseDTO> result = theMarvelUniverseDTOList.stream()
+                .sorted(Comparator.comparing(TheMarvelUniverseDTO::getReleaseDate).reversed())
+                .collect(Collectors.toList());
+        return result;
+    }
+
+    public List<TheMarvelUniverseDTO> listTheMarvelUniverseByVoteAverage() {
+        List<TheMarvelUniverseDTO> result = theMarvelUniverseDTOList.stream()
+                .sorted(Comparator.comparing(TheMarvelUniverseDTO::getVoteAverage).reversed())
+                .collect(Collectors.toList());
+        return result;
+    }
+
+    public List<TheMarvelUniverseDTO> listTheMarvelUniverseByVoteCount() {
+        List<TheMarvelUniverseDTO> result = theMarvelUniverseDTOList.stream()
+                .sorted(Comparator.comparing(TheMarvelUniverseDTO::getVoteCount).reversed())
+                .collect(Collectors.toList());
+        return result;
     }
 
 }

@@ -4,7 +4,9 @@
       lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Taming Thymeleaf</title>
+    <title>The Marvel universe</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.js}"></script>
 </head>
 <body>
 <h1>
@@ -13,17 +15,38 @@
 </h1>
 <a th:href="@{/list-the-marvel-universe(action='sort-by-title')}">[sort by title]</a>
 <a th:href="@{/list-the-marvel-universe(action='sort-by-popularity')}">[sort by popularity]</a>
+<a th:href="@{/list-the-marvel-universe(action='sort-by-release-date')}">[sort by release date]</a>
+<a th:href="@{/list-the-marvel-universe(action='sort-by-vote-average')}">[sort by vote average]</a>
+<a th:href="@{/list-the-marvel-universe(action='sort-by-vote-count')}">[sort by vote count]</a>
 <div>
-<!--    <form action="#" th:action="@{/listMarvelUniverse}" th:object="${model}" method="post">-->
-<!--        <button type="submit">list</button>-->
-<!--    </form>-->
 
-    <ul>
-        <li th:each="u : ${theMarvelUniverse}">
-            <span th:text="${u.originalTitle} + ' ' + ${u.popularity}"></span>
-        </li>
-    </ul>
-
+<!--    <table class="table">-->
+    <table class="table table-bordered table-sortable">
+        <thead class="thead-light">
+            <tr>
+                <th>Title</th>
+                <th>Popularity </th>
+                <th>Release date</th>
+                <th>Vote average</th>
+                <th>Vote count</th>
+            </tr>
+        </thead>
+        <th:block th:each="u : ${theMarvelUniverse}">
+            <tr>
+                <td th:text="${u.originalTitle}">Spider-Man: No Way Home</td>
+                <td th:text="${u.popularity}">441.48</td>
+                <td th:text="${u.releaseDate}">2021-12-15</td>
+                <td th:text="${u.voteAverage}">8</td>
+                <td th:text="${u.voteCount}">16450</td>
+            </tr>
+        </th:block>
+    </table>
+    <!--    private String originalTitle;-->
+    <!--    private BigDecimal popularity;-->
+    <!--    ==> private String posterPath;-->
+    <!--    private LocalDate releaseDate;-->
+    <!--    private int voteAverage;-->
+    <!--    private int voteCount;-->
 
 </div>
 </body>

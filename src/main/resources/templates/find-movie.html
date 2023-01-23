@@ -12,7 +12,7 @@
     Find a movie
 </h1>
 <div>
-    <form action="#" th:action="@{/findMovie}" th:object="${movieObj}" method="post">
+    <form action="#" th:action="@{/findMovie}" th:object="${movieDTO}" method="post">
         <input type="text" id="title" name="title" th:value="${title}">
         <button type="submit">find</button>
     </form>

@@ -1,6 +1,6 @@
 package jaeger.de.miel.HelloThymeleaf.mappers;
 
-import jaeger.de.miel.HelloThymeleaf.model.entities.TheMarvelUniverseObj;
+import jaeger.de.miel.HelloThymeleaf.model.dto.TheMarvelUniverseDTO;
 import jaeger.de.miel.HelloThymeleaf.model.org.themoviedb.lists.getdetails.Item;
 import org.springframework.stereotype.Component;
 
@@ -13,11 +13,11 @@ import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 @Component
 public class TheMarvelUniverseMapper {
 
-    public static TheMarvelUniverseObj toObj(Item theMarvelUniverseItem) {
+    public static TheMarvelUniverseDTO toDTO(Item theMarvelUniverseItem) {
         BigDecimal popularity = new BigDecimal(theMarvelUniverseItem.getPopularity()).setScale(2, RoundingMode.HALF_EVEN);
         LocalDate releaseDate = LocalDate.parse(theMarvelUniverseItem.getReleaseDate(), ISO_LOCAL_DATE);
 
-        var theMarvelUniverseObj = new TheMarvelUniverseObj();
+        var theMarvelUniverseObj = new TheMarvelUniverseDTO();
         theMarvelUniverseObj.setOriginalTitle(theMarvelUniverseItem.getOriginalTitle());
         theMarvelUniverseObj.setPopularity(popularity);
         theMarvelUniverseObj.setPosterPath(theMarvelUniverseItem.getPosterPath());

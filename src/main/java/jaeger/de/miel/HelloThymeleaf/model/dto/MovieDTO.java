@@ -1,4 +1,4 @@
-package jaeger.de.miel.HelloThymeleaf.model.entities;
+package jaeger.de.miel.HelloThymeleaf.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +9,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Data
-public class MovieObj {
+public class MovieDTO {
     private String title;
 }

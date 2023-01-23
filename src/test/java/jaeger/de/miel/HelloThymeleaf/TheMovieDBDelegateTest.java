@@ -1,17 +1,14 @@
 package jaeger.de.miel.HelloThymeleaf;
 
-import jaeger.de.miel.HelloThymeleaf.model.entities.TheMarvelUniverseObj;
-import jaeger.de.miel.HelloThymeleaf.model.org.themoviedb.lists.getdetails.Item;
+import jaeger.de.miel.HelloThymeleaf.model.dto.TheMarvelUniverseDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = SpringBootApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class TheMovieDBDelegateTest {
@@ -21,7 +18,7 @@ class TheMovieDBDelegateTest {
 
     @Test
     void listTheMarvelUniverse() {
-        List<TheMarvelUniverseObj> listTheMarvelUniverse = movieDBDelegate.listTheMarvelUniverseByTitle();
+        List<TheMarvelUniverseDTO> listTheMarvelUniverse = movieDBDelegate.listTheMarvelUniverseByTitle();
         System.out.println(listTheMarvelUniverse);
     }
 

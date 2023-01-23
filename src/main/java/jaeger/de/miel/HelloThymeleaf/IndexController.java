@@ -1,7 +1,7 @@
 package jaeger.de.miel.HelloThymeleaf;
 
-import jaeger.de.miel.HelloThymeleaf.model.entities.MovieObj;
-import jaeger.de.miel.HelloThymeleaf.model.entities.TheMarvelUniverseObj;
+import jaeger.de.miel.HelloThymeleaf.model.dto.MovieDTO;
+import jaeger.de.miel.HelloThymeleaf.model.dto.TheMarvelUniverseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -46,7 +46,7 @@ public class IndexController {
 
         System.out.println("action is: " + action);
 
-        List<TheMarvelUniverseObj> theMarvelUniverse;
+        List<TheMarvelUniverseDTO> theMarvelUniverse;
 
         switch (action) {
             case "sort-by-title":
@@ -55,8 +55,17 @@ public class IndexController {
             case "sort-by-popularity":
                 theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByPopularity();
                 break;
+            case "sort-by-release-date":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByReleaseDate();
+                break;
+            case "sort-by-vote-average":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByVoteAverage();
+                break;
+            case "sort-by-vote-count":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByVoteCount();
+                break;
             default:
-                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByTitle();
+                theMarvelUniverse = null;
         }
 
         model.addAttribute("theMarvelUniverse", theMarvelUniverse);
@@ -70,10 +79,10 @@ public class IndexController {
     }
 
     @PostMapping("findMovie")
-    public String findMoviePost(@ModelAttribute MovieObj movieObj, Model model) {
+    public String findMoviePost(@ModelAttribute MovieDTO movieDTO, Model model) {
         System.out.println("calling findMovie");
-        System.out.println(movieObj);
-        model.addAttribute("title", movieObj.getTitle());
+        System.out.println(movieDTO);
+        model.addAttribute("title", movieDTO.getTitle());
 
 
         return "find-movie";

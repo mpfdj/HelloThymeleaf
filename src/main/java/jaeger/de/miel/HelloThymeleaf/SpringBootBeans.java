@@ -1,7 +1,7 @@
 package jaeger.de.miel.HelloThymeleaf;
 
 import jaeger.de.miel.HelloThymeleaf.mappers.TheMarvelUniverseMapper;
-import jaeger.de.miel.HelloThymeleaf.model.entities.TheMarvelUniverseObj;
+import jaeger.de.miel.HelloThymeleaf.model.dto.TheMarvelUniverseDTO;
 import jaeger.de.miel.HelloThymeleaf.model.org.themoviedb.lists.getdetails.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,11 +18,11 @@ public class SpringBootBeans {
 
     @Bean
 //    @Scope("singleton")  // Default scope for a Bean is Singleton
-    public List<TheMarvelUniverseObj> getTheMarveUniverseObjListSingleton() {
+    public List<TheMarvelUniverseDTO> getTheMarveUniverseObjListSingleton() {
         List<Item> theMarvelUniverseItems = theMovieDBService.listTheMarvelUniverse().block().getItems();
 
-        List<TheMarvelUniverseObj> result = theMarvelUniverseItems.stream()
-                .map(item -> TheMarvelUniverseMapper.toObj(item))
+        List<TheMarvelUniverseDTO> result = theMarvelUniverseItems.stream()
+                .map(item -> TheMarvelUniverseMapper.toDTO(item))
                 .collect(Collectors.toList());
 
         return result;

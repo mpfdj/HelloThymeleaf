@@ -1,4 +1,4 @@
-package jaeger.de.miel.HelloThymeleaf.model.entities;
+package jaeger.de.miel.HelloThymeleaf.model.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @ToString
 @Data
-public class TheMarvelUniverseObj {
+public class TheMarvelUniverseDTO {
     private String originalTitle;
     private BigDecimal popularity;
     private String posterPath;
