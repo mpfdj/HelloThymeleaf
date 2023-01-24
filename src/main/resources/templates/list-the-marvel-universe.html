@@ -7,6 +7,8 @@
     <title>The Marvel universe</title>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
     <script type="text/javascript" th:src="@{/js/bootstrap.bundle.js}"></script>
+    <script type="text/javascript" th:src="@{/js/fontawesome.kit.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/actions.js}"></script>
 </head>
 <body>
 <h1>
@@ -20,24 +22,30 @@
 <a th:href="@{/list-the-marvel-universe(action='sort-by-vote-count')}">[sort by vote count]</a>
 <div>
 
-<!--    <table class="table">-->
+    <!--    <table class="table">-->
     <table class="table table-bordered table-sortable">
         <thead class="thead-light">
-            <tr>
-                <th>Title</th>
-                <th>Popularity </th>
-                <th>Release date</th>
-                <th>Vote average</th>
-                <th>Vote count</th>
-            </tr>
+        <tr>
+            <th:block th:switch="${action}">
+                <th th:case="'sort-by-title-asc'" th:onclick="sortByTitle('descending')">Title <i class="fa-solid fa-sort"></i></th>
+                <th th:case="'sort-by-title-desc'" th:onclick="sortByTitle('ascending')">Title <i class="fa-solid fa-sort"></i></th>
+                <th th:case="*" th:onclick="sortByTitle('ascending')">Title <i class="fa-solid fa-sort"></i></th>
+            </th:block>
+<!--            <th th:if="${action} == 'sort-by-title-asc'" th:onclick="sortByTitle('descending')">Title <i class="fa-solid fa-sort"></i></th>-->
+<!--            <th th:if="${action} == 'sort-by-title-desc'" th:onclick="sortByTitle('ascending')">Title <i class="fa-solid fa-sort"></i></th>-->
+            <th>Popularity</th>
+            <th>Release date</th>
+            <th>Vote average</th>
+            <th>Vote count</th>
+        </tr>
         </thead>
-        <th:block th:each="u : ${theMarvelUniverse}">
+        <th:block th:each="mu : ${theMarvelUniverse}">
             <tr>
-                <td th:text="${u.originalTitle}">Spider-Man: No Way Home</td>
-                <td th:text="${u.popularity}">441.48</td>
-                <td th:text="${u.releaseDate}">2021-12-15</td>
-                <td th:text="${u.voteAverage}">8</td>
-                <td th:text="${u.voteCount}">16450</td>
+                <td th:text="${mu.originalTitle}">Spider-Man: No Way Home</td>
+                <td th:text="${mu.popularity}">441.48</td>
+                <td th:text="${mu.releaseDate}">2021-12-15</td>
+                <td th:text="${mu.voteAverage}">8</td>
+                <td th:text="${mu.voteCount}">16450</td>
             </tr>
         </th:block>
     </table>

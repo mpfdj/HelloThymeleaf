@@ -44,6 +44,20 @@ public class TheMovieDBDelegate {
         return theMarvelUniverseDTOList;
     }
 
+    public List<TheMarvelUniverseDTO> listTheMarvelUniverseByTitle(String sortingOrder) {
+        Comparator<TheMarvelUniverseDTO> comparator;
+        if (sortingOrder.equals("ascending")) {
+            comparator = Comparator.comparing(TheMarvelUniverseDTO::getOriginalTitle);
+        } else {
+            comparator = Comparator.comparing(TheMarvelUniverseDTO::getOriginalTitle).reversed();
+        }
+
+        List<TheMarvelUniverseDTO> result = theMarvelUniverseDTOList.stream()
+                .sorted(comparator)
+                .collect(Collectors.toList());
+        return result;
+    }
+
     public List<TheMarvelUniverseDTO> listTheMarvelUniverseByPopularity() {
         // Sorting using stream API
         List<TheMarvelUniverseDTO> result = theMarvelUniverseDTOList.stream()

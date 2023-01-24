@@ -67,3 +67,10 @@ https://image.tmdb.org/t/p/original/coJVIUEOToAEGViuhclM7pXC75R.jpg
 
 # DTO pattern
 https://www.baeldung.com/java-dto-pattern
+
+
+# Css and icons
+https://fontawesome.com
+https://fontawesome.com/kits
+https://www.bootstrapcdn.com
+https://www.bootstrapcdn.com/fontawesome

@@ -41,7 +41,7 @@ public class IndexController {
 
     @GetMapping("list-the-marvel-universe")
     public String listTheMarvelUniverseGet(
-            @RequestParam(value = "action", defaultValue = "sort-by-title") String action,
+            @RequestParam(value = "action", defaultValue = "sort-by-title-asc") String action,
             Model model) {
 
         System.out.println("action is: " + action);
@@ -49,8 +49,11 @@ public class IndexController {
         List<TheMarvelUniverseDTO> theMarvelUniverse;
 
         switch (action) {
-            case "sort-by-title":
-                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByTitle();
+            case "sort-by-title-asc":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByTitle("ascending");
+                break;
+            case "sort-by-title-desc":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByTitle("descending");
                 break;
             case "sort-by-popularity":
                 theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByPopularity();
@@ -69,7 +72,7 @@ public class IndexController {
         }
 
         model.addAttribute("theMarvelUniverse", theMarvelUniverse);
-
+        model.addAttribute("action", action);
         return "list-the-marvel-universe";
     }
 
