@@ -5,38 +5,60 @@
 <head>
     <meta charset="UTF-8">
     <title>The Marvel universe</title>
-    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
-    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.js}"></script>
-    <script type="text/javascript" th:src="@{/js/fontawesome.kit.min.js}"></script>
+<!--    Local includes -->
+<!--    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>-->
+<!--    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.js}"></script>-->
+<!--    <script type="text/javascript" th:src="@{/js/fontawesome.kit.min.js}"></script>-->
+    <link th:href="@{/css/app.css}" rel="stylesheet"/>
     <script type="text/javascript" th:src="@{/js/actions.js}"></script>
+
+<!--    Include from CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/5fe81ccaed.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
 </head>
 <body>
 <h1>
     <a th:href="@{/}">[ home ]</a>
     List the Marvel universe
 </h1>
-<a th:href="@{/list-the-marvel-universe(action='sort-by-title')}">[sort by title]</a>
-<a th:href="@{/list-the-marvel-universe(action='sort-by-popularity')}">[sort by popularity]</a>
-<a th:href="@{/list-the-marvel-universe(action='sort-by-release-date')}">[sort by release date]</a>
-<a th:href="@{/list-the-marvel-universe(action='sort-by-vote-average')}">[sort by vote average]</a>
-<a th:href="@{/list-the-marvel-universe(action='sort-by-vote-count')}">[sort by vote count]</a>
+<!--<a th:href="@{/list-the-marvel-universe(action='sort-by-title')}">[sort by title]</a>-->
+<!--<a th:href="@{/list-the-marvel-universe(action='sort-by-popularity')}">[sort by popularity]</a>-->
+<!--<a th:href="@{/list-the-marvel-universe(action='sort-by-release-date')}">[sort by release date]</a>-->
+<!--<a th:href="@{/list-the-marvel-universe(action='sort-by-vote-average')}">[sort by vote average]</a>-->
+<!--<a th:href="@{/list-the-marvel-universe(action='sort-by-vote-count')}">[sort by vote count]</a>-->
 <div>
 
-    <!--    <table class="table">-->
-    <table class="table table-bordered table-sortable">
+    <table class="table table-bordered table-sortable table-hover">
         <thead class="thead-light">
         <tr>
             <th:block th:switch="${action}">
-                <th th:case="'sort-by-title-asc'" th:onclick="sortByTitle('descending')">Title <i class="fa-solid fa-sort"></i></th>
-                <th th:case="'sort-by-title-desc'" th:onclick="sortByTitle('ascending')">Title <i class="fa-solid fa-sort"></i></th>
-                <th th:case="*" th:onclick="sortByTitle('ascending')">Title <i class="fa-solid fa-sort"></i></th>
+                <th th:case="'sort-by-title-asc'" th:onclick="sortByTitle('descending')">Title <i class="fa-solid fa-arrow-down-wide-short"></i></th>
+                <th th:case="'sort-by-title-desc'" th:onclick="sortByTitle('ascending')">Title <i class="fa-solid fa-arrow-up-wide-short"></i></th>
+<!--                <th th:case="*" th:onclick="sortByTitle('ascending')">Title <i class="fa-solid fa-arrow-up-wide-short"></i></th>-->
+                <th th:case="*" th:onclick="sortByTitle('ascending')">Title</th>
+*           </th:block>
+            <th:block th:switch="${action}">
+                <th th:case="'sort-by-popularity-asc'" th:onclick="sortByPopularity('descending')">Popularity <i class="fa-solid fa-arrow-down-wide-short"></i></th>
+                <th th:case="'sort-by-popularity-desc'" th:onclick="sortByPopularity('ascending')">Popularity <i class="fa-solid fa-arrow-up-wide-short"></i></th>
+                <th th:case="*" th:onclick="sortByPopularity('ascending')">Popularity</th>
             </th:block>
-<!--            <th th:if="${action} == 'sort-by-title-asc'" th:onclick="sortByTitle('descending')">Title <i class="fa-solid fa-sort"></i></th>-->
-<!--            <th th:if="${action} == 'sort-by-title-desc'" th:onclick="sortByTitle('ascending')">Title <i class="fa-solid fa-sort"></i></th>-->
-            <th>Popularity</th>
-            <th>Release date</th>
-            <th>Vote average</th>
-            <th>Vote count</th>
+            <th:block th:switch="${action}">
+                <th th:case="'sort-by-release-date-asc'" th:onclick="sortByReleaseDate('descending')">Release date <i class="fa-solid fa-arrow-down-wide-short"></i></th>
+                <th th:case="'sort-by-release-date-desc'" th:onclick="sortByReleaseDate('ascending')">Release date <i class="fa-solid fa-arrow-up-wide-short"></i></th>
+                <th th:case="*" th:onclick="sortByReleaseDate('ascending')">Release date</th>
+            </th:block>
+            <th:block th:switch="${action}">
+                <th th:case="'sort-by-vote-average-asc'" th:onclick="sortByVoteAverage('descending')">Vote average <i class="fa-solid fa-arrow-down-wide-short"></i></th>
+                <th th:case="'sort-by-vote-average-desc'" th:onclick="sortByVoteAverage('ascending')">Vote average <i class="fa-solid fa-arrow-up-wide-short"></i></th>
+                <th th:case="*" th:onclick="sortByVoteAverage('ascending')">Vote average</th>
+            </th:block>
+            <th:block th:switch="${action}">
+                <th th:case="'sort-by-vote-count-asc'" th:onclick="sortByVoteCount('descending')">Vote count <i class="fa-solid fa-arrow-down-wide-short"></i></th>
+                <th th:case="'sort-by-vote-count-desc'" th:onclick="sortByVoteCount('ascending')">Vote count <i class="fa-solid fa-arrow-up-wide-short"></i></th>
+                <th th:case="*" th:onclick="sortByVoteCount('ascending')">Vote count</th>
+            </th:block>
         </tr>
         </thead>
         <th:block th:each="mu : ${theMarvelUniverse}">

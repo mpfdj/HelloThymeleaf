@@ -74,3 +74,4 @@ https://fontawesome.com
 https://fontawesome.com/kits
 https://www.bootstrapcdn.com
 https://www.bootstrapcdn.com/fontawesome
+https://www.jsdelivr.com

@@ -22,6 +22,7 @@ public class TheMovieDBDelegate {
 
     private List<TheMarvelUniverseDTO> theMarvelUniverseDTOList;
 
+    private Comparator<TheMarvelUniverseDTO> comparator;
 
     @PostConstruct
     public void postConstruct() {
@@ -39,13 +40,14 @@ public class TheMovieDBDelegate {
     }
 
     public List<TheMarvelUniverseDTO> listTheMarvelUniverseByTitle() {
-        // Sorting on a Collections API
-        theMarvelUniverseDTOList.sort((obj1, obj2) -> obj1.getOriginalTitle().compareTo(obj2.getOriginalTitle()));
+        // Sorting using the Collections API
+        Comparator<TheMarvelUniverseDTO> comparator = Comparator.comparing(TheMarvelUniverseDTO::getOriginalTitle);
+        theMarvelUniverseDTOList.sort(comparator);
         return theMarvelUniverseDTOList;
     }
 
     public List<TheMarvelUniverseDTO> listTheMarvelUniverseByTitle(String sortingOrder) {
-        Comparator<TheMarvelUniverseDTO> comparator;
+        // Sorting using the stream API
         if (sortingOrder.equals("ascending")) {
             comparator = Comparator.comparing(TheMarvelUniverseDTO::getOriginalTitle);
         } else {
@@ -58,36 +60,48 @@ public class TheMovieDBDelegate {
         return result;
     }
 
-    public List<TheMarvelUniverseDTO> listTheMarvelUniverseByPopularity() {
-        // Sorting using stream API
-        List<TheMarvelUniverseDTO> result = theMarvelUniverseDTOList.stream()
-                .sorted(Comparator.comparing(TheMarvelUniverseDTO::getPopularity).reversed())
-                .collect(Collectors.toList());
-        return result;
+    public List<TheMarvelUniverseDTO> listTheMarvelUniverseByPopularity(String sortingOrder) {
+        if (sortingOrder.equals("ascending")) {
+            comparator = Comparator.comparing(TheMarvelUniverseDTO::getPopularity);
+        } else {
+            comparator = Comparator.comparing(TheMarvelUniverseDTO::getPopularity).reversed();
+        }
 
-//        theMarvelUniverseDTOList.sort((obj1, obj2) -> obj2.getPopularity().compareTo(obj1.getPopularity()));
-//        return theMarvelUniverseDTOList;
+        theMarvelUniverseDTOList.sort(comparator);
+        return theMarvelUniverseDTOList;
     }
 
-    public List<TheMarvelUniverseDTO> listTheMarvelUniverseByReleaseDate() {
-        List<TheMarvelUniverseDTO> result = theMarvelUniverseDTOList.stream()
-                .sorted(Comparator.comparing(TheMarvelUniverseDTO::getReleaseDate).reversed())
-                .collect(Collectors.toList());
-        return result;
+    public List<TheMarvelUniverseDTO> listTheMarvelUniverseByReleaseDate(String sortingOrder) {
+        if (sortingOrder.equals("ascending")) {
+            comparator = Comparator.comparing(TheMarvelUniverseDTO::getReleaseDate);
+        } else {
+            comparator = Comparator.comparing(TheMarvelUniverseDTO::getReleaseDate).reversed();
+        }
+
+        theMarvelUniverseDTOList.sort(comparator);
+        return theMarvelUniverseDTOList;
     }
 
-    public List<TheMarvelUniverseDTO> listTheMarvelUniverseByVoteAverage() {
-        List<TheMarvelUniverseDTO> result = theMarvelUniverseDTOList.stream()
-                .sorted(Comparator.comparing(TheMarvelUniverseDTO::getVoteAverage).reversed())
-                .collect(Collectors.toList());
-        return result;
+    public List<TheMarvelUniverseDTO> listTheMarvelUniverseByVoteAverage(String sortingOrder) {
+        if (sortingOrder.equals("ascending")) {
+            comparator = Comparator.comparing(TheMarvelUniverseDTO::getVoteAverage);
+        } else {
+            comparator = Comparator.comparing(TheMarvelUniverseDTO::getVoteAverage).reversed();
+        }
+
+        theMarvelUniverseDTOList.sort(comparator);
+        return theMarvelUniverseDTOList;
     }
 
-    public List<TheMarvelUniverseDTO> listTheMarvelUniverseByVoteCount() {
-        List<TheMarvelUniverseDTO> result = theMarvelUniverseDTOList.stream()
-                .sorted(Comparator.comparing(TheMarvelUniverseDTO::getVoteCount).reversed())
-                .collect(Collectors.toList());
-        return result;
+    public List<TheMarvelUniverseDTO> listTheMarvelUniverseByVoteCount(String sortingOrder) {
+        if (sortingOrder.equals("ascending")) {
+            comparator = Comparator.comparing(TheMarvelUniverseDTO::getVoteCount);
+        } else {
+            comparator = Comparator.comparing(TheMarvelUniverseDTO::getVoteCount).reversed();
+        }
+
+        theMarvelUniverseDTOList.sort(comparator);
+        return theMarvelUniverseDTOList;
     }
 
 }

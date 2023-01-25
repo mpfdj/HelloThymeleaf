@@ -55,17 +55,29 @@ public class IndexController {
             case "sort-by-title-desc":
                 theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByTitle("descending");
                 break;
-            case "sort-by-popularity":
-                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByPopularity();
+            case "sort-by-popularity-asc":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByPopularity("ascending");
                 break;
-            case "sort-by-release-date":
-                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByReleaseDate();
+            case "sort-by-popularity-desc":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByPopularity("descending");
                 break;
-            case "sort-by-vote-average":
-                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByVoteAverage();
+            case "sort-by-release-date-asc":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByReleaseDate("ascending");
                 break;
-            case "sort-by-vote-count":
-                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByVoteCount();
+            case "sort-by-release-date-desc":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByReleaseDate("descending");
+                break;
+            case "sort-by-vote-average-asc":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByVoteAverage("ascending");
+                break;
+            case "sort-by-vote-average-desc":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByVoteAverage("descending");
+                break;
+            case "sort-by-vote-count-asc":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByVoteCount("ascending");
+                break;
+            case "sort-by-vote-count-desc":
+                theMarvelUniverse = theMovieDBDelegate.listTheMarvelUniverseByVoteCount("descending");
                 break;
             default:
                 theMarvelUniverse = null;
