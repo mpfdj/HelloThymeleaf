@@ -75,3 +75,31 @@ https://fontawesome.com/kits
 https://www.bootstrapcdn.com
 https://www.bootstrapcdn.com/fontawesome
 https://www.jsdelivr.com
+
+
+# Alphanumeric comparator Java
+https://github.com/farbodsafaei/alphanumeric-comparator
+
+
+# Bootstrap table sort alphanumeric
+https://examples.bootstrap-table.com/index.html#column-options/natural-sorting.html
+https://github.com/wenzhixin/bootstrap-table-examples/tree/master/utils/natural-sorting
+
+
+# Bootstrap table filter
+https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_filters_table&stacked=h
+
+
+# Bootstrap table load data
+https://bootstrap-table.com/docs/api/table-options/
+https://examples.bootstrap-table.com/#methods/load.html#view-source
+https://stackoverflow.com/questions/45499723/adding-a-class-to-dynamic-bootstrap-table-rows
+
+
+# Thymeleaf and Javascript
+https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#javascript-inlining
+
+
+# jQuery nested selectors
+https://stackoverflow.com/questions/3890458/jquery-nested-selector
+

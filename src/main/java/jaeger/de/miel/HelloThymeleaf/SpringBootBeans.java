@@ -1,12 +1,19 @@
 package jaeger.de.miel.HelloThymeleaf;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import jaeger.de.miel.HelloThymeleaf.dto.ContentItemDTO;
 import jaeger.de.miel.HelloThymeleaf.mappers.TheMarvelUniverseMapper;
 import jaeger.de.miel.HelloThymeleaf.model.dto.TheMarvelUniverseDTO;
 import jaeger.de.miel.HelloThymeleaf.model.org.themoviedb.lists.getdetails.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,4 +34,13 @@ public class SpringBootBeans {
 
         return result;
     }
+
+    @Bean
+    public List<ContentItemDTO> getContentItemDTOs() throws IOException {
+        File jsonFile = ResourceUtils.getFile("classpath:data.json");
+        ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
+        CollectionType objectMapperClass = objectMapper.getTypeFactory().constructCollectionType(List.class, ContentItemDTO.class);
+        return objectMapper.readValue(jsonFile, objectMapperClass);
+    }
+
 }

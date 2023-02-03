@@ -1,13 +1,23 @@
 package jaeger.de.miel.HelloThymeleaf;
 
+import com.binaryheart.common.comparator.AlphaNumericComparator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import jaeger.de.miel.HelloThymeleaf.dto.ContentItemDTO;
 import jaeger.de.miel.HelloThymeleaf.model.dto.MovieDTO;
 import jaeger.de.miel.HelloThymeleaf.model.dto.TheMarvelUniverseDTO;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -20,8 +30,9 @@ public class IndexController {
     @Autowired
     private ApplicationContext context;
 
-    @GetMapping
+    private List<ContentItemDTO> contentItemDTOs;
 
+    @GetMapping
     public String index(Model model) {
 
         model.addAttribute("pageTitle", "Taming Thymeleaf");
@@ -93,6 +104,26 @@ public class IndexController {
         return "list-movie-genres";
     }
 
+    @GetMapping("test-with-sort")
+    public String testWithSort(Model model) throws IOException {
+
+        AlphaNumericComparator comparator = new AlphaNumericComparator();
+        Comparator<ContentItemDTO> compareByNameAsc = (dto1, dto2) -> comparator.compare(dto1.getName(), dto2.getName());
+        Comparator<ContentItemDTO> compareByNameDesc = (dto1, dto2) -> comparator.compare(dto2.getName(), dto1.getName());
+        model.addAttribute("contentItemDTOs", contentItemDTOs);
+        model.addAttribute("compareByNameAsc", compareByNameAsc);
+        model.addAttribute("compareByNameDesc", compareByNameDesc);
+
+        return "test-with-sort";
+    }
+
+
+
+
+
+
+
+
     @PostMapping("findMovie")
     public String findMoviePost(@ModelAttribute MovieDTO movieDTO, Model model) {
         System.out.println("calling findMovie");
@@ -120,6 +151,11 @@ public class IndexController {
     public String listTheMarvelUniverse(Model model) {
         System.out.println("calling listMarvelUniverse");
         return "list-the-marvel-universe";
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        contentItemDTOs = (List<ContentItemDTO>) context.getBean("getContentItemDTOs");
     }
 
 }
