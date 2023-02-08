@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test with layout</title>
+</head>
+<body>
+<div id="list">
+    <ul>
+        <li th:each="p : ${pcodes}">
+            <a th:href="@{/get-data(pcode=${p})}" th:text="${p}"></a>
+        </li>
+    </ul>
+</div>
+
+
+
+<span id="eventCount" th:text="${numDeviceEventsWithAlarm}"></span>
+
+<div th:fragment="main">
+   here goes the data...
+</div>
+</body>
+</html>

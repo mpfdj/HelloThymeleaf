@@ -103,3 +103,7 @@ https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#javascript-inlin
 # jQuery nested selectors
 https://stackoverflow.com/questions/3890458/jquery-nested-selector
 
+
+# Update div
+https://www.appsloveworld.com/springmvc/100/24/update-content-in-thymeleaf-without-reloading-whole-page
+https://riptutorial.com/thymeleaf/example/28530/replacing-fragments-with-ajax
