@@ -1,19 +1,144 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en" th:fragment="content2">
 <head>
+
+    <script th:inline="javascript">
+
+        function sort(sortingType) {
+            var d = [[${contentItemDTOs}]];
+            var comparator;
+
+            switch (sortingType) {
+                case 'compareByNameAsc':
+                    comparator = (a, b) => a.name.localeCompare(b.name, 'en', { numeric: true })
+                    d.sort(comparator);
+                break;
+                case 'compareByNameDesc':
+                    comparator = (a, b) => a.name.localeCompare(b.name, 'en', { numeric: true })
+                    d.sort(comparator).reverse();
+                break;
+                case 'compareBySizeAsc':
+                    comparator = (a, b) => a.sizeInBytes - b.sizeInBytes;
+                    d.sort(comparator);
+                break;
+                case 'compareBySizeDesc':
+                    comparator = (a, b) => a.sizeInBytes - b.sizeInBytes;
+                    d.sort(comparator).reverse();
+                break;
+                case 'compareByLastModifiedAsc':
+                    comparator = (a, b) => a.last_modified.localeCompare(b.last_modified, 'en', { numeric: true })
+                    d.sort(comparator);
+                break;
+                case 'compareByLastModifiedDesc':
+                    comparator = (a, b) => a.last_modified.localeCompare(b.last_modified, 'en', { numeric: true })
+                    d.sort(comparator).reverse();
+                break;
+                default:
+                    console.log('sortingType ' + sortingType + ' not implemented.');
+            }
+
+            $('#table').bootstrapTable('destroy');
+            $('#table').bootstrapTable({
+                data: d
+            });
+
+
+            /* Set default header */
+            $('thead').replaceWith(fragmentDefaultTableHeader);
+
+
+            switch (sortingType) {
+                case 'compareByNameAsc':
+                    $("th[data-field='name']").replaceWith(fragmentSortByNameDesc);
+                break;
+                case 'compareByNameDesc':
+                    $("th[data-field='name']").replaceWith(fragmentSortByNameAsc);
+                break;
+                case 'compareBySizeAsc':
+                    $("th[data-field='size']").replaceWith(fragmentSortBySizeDesc);
+                break;
+                case 'compareBySizeDesc':
+                    $("th[data-field='size']").replaceWith(fragmentSortBySizeAsc);
+                break;
+                case 'compareByLastModifiedAsc':
+                    $("th[data-field='last_modified']").replaceWith(fragmentSortByLastModifiedDesc);
+                break;
+                case 'compareByLastModifiedDesc':
+                    $("th[data-field='last_modified']").replaceWith(fragmentSortByLastModifiedAsc);
+                break;
+                default:
+                    console.log('sortingType ' + sortingType + 'for replaceWith switch not implemented.');
+            }
+
+            var value = $('#tfSearch').val().toLowerCase();;
+            $('#table > tbody > tr').filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+
+        }
+
+        $(document).ready(function(){
+            $(document).on('click','#btnSortByNameAsc', function() {
+                sort('compareByNameAsc');
+            });
+
+            $(document).on('click','#btnSortByNameDesc', function() {
+                sort('compareByNameDesc');
+            });
+
+            $(document).on('click','#btnSortBySizeAsc', function() {
+                sort('compareBySizeAsc');
+            });
+
+            $(document).on('click','#btnSortBySizeDesc', function() {
+                sort('compareBySizeDesc');
+            });
+
+            $(document).on('click','#btnSortByLastModifiedAsc', function() {
+                sort('compareByLastModifiedAsc');
+            });
+
+            $(document).on('click','#btnSortByLastModifiedDesc', function() {
+                sort('compareByLastModifiedDesc');
+            });
+
+            $('#tfSearch').on('keyup', function() {
+                var value = $(this).val().toLowerCase();
+                $('#table > tbody > tr').filter(function() {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            /* Init table */
+            sort('compareByNameAsc');
+
+        });
+
+    </script>
+
+
+
+
 </head>
-
 <body>
-<div th:fragment="content1">
-    This is Content 1
-    <span th:text="${data}">xxx</span>
-</div>
+<h1>
+    <a th:href="@{/}">[ home ]</a>
+    Test with sort
+</h1>
 
-<div th:fragment="content2">
-    This is Content 2
-    <span th:text="${data}">xxx</span>
+<input class="form-control" id="tfSearch" type="text" placeholder="Search...">
 
-</div>
+<table class="table table-hover table-sm" id="table">
+    <thead>
+    <tr>
+        <th data-field="name">name</th>
+        <th data-field="size">size</th>
+        <th data-field="last_modified">last_modified</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
 </body>
 </html>
+

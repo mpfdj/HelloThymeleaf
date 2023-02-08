@@ -123,12 +123,7 @@ public class IndexController {
 
     @GetMapping("get-data")
     public String get(@RequestParam(value = "pcode") String pcode, Model model) {
-//        System.out.println("get-data for pcode:" + pcode);
-//        return "test-with-layout :: #main";
 
-//        model.addAttribute("numDeviceEventsWithAlarm", 100);
-
-        // change "myview" to the name of your view
         return "test-with-layout :: #main";
 
 
