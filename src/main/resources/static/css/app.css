@@ -1,7 +1,3 @@
-/*.table-hover > thead > tr > th:hover {
-  cursor: pointer;
-}
-*/
-.table-hover th:hover {
+.table-hover > thead > tr > th:hover {
   cursor: pointer;
 }
