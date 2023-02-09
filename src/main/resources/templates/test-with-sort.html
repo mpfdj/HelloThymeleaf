@@ -23,27 +23,27 @@
             var comparator;
 
             switch (sortingType) {
-                case 'compareByNameAsc':
+                case 'sortByNameAsc':
                     comparator = (a, b) => a.name.localeCompare(b.name, 'en', { numeric: true })
                     d.sort(comparator);
                 break;
-                case 'compareByNameDesc':
+                case 'sortByNameDesc':
                     comparator = (a, b) => a.name.localeCompare(b.name, 'en', { numeric: true })
                     d.sort(comparator).reverse();
                 break;
-                case 'compareBySizeAsc':
+                case 'sortBySizeAsc':
                     comparator = (a, b) => a.sizeInBytes - b.sizeInBytes;
                     d.sort(comparator);
                 break;
-                case 'compareBySizeDesc':
+                case 'sortBySizeDesc':
                     comparator = (a, b) => a.sizeInBytes - b.sizeInBytes;
                     d.sort(comparator).reverse();
                 break;
-                case 'compareByLastModifiedAsc':
+                case 'sortByLastModifiedAsc':
                     comparator = (a, b) => a.last_modified.localeCompare(b.last_modified, 'en', { numeric: true })
                     d.sort(comparator);
                 break;
-                case 'compareByLastModifiedDesc':
+                case 'sortByLastModifiedDesc':
                     comparator = (a, b) => a.last_modified.localeCompare(b.last_modified, 'en', { numeric: true })
                     d.sort(comparator).reverse();
                 break;
@@ -60,60 +60,67 @@
             /* Set default header */
             $('thead').replaceWith(fragmentDefaultTableHeader);
 
-
             switch (sortingType) {
-                case 'compareByNameAsc':
+                case 'sortByNameAsc':
                     $("th[data-field='name']").replaceWith(fragmentSortByNameDesc);
                 break;
-                case 'compareByNameDesc':
+                case 'sortByNameDesc':
                     $("th[data-field='name']").replaceWith(fragmentSortByNameAsc);
                 break;
-                case 'compareBySizeAsc':
+                case 'sortBySizeAsc':
                     $("th[data-field='size']").replaceWith(fragmentSortBySizeDesc);
                 break;
-                case 'compareBySizeDesc':
+                case 'sortBySizeDesc':
                     $("th[data-field='size']").replaceWith(fragmentSortBySizeAsc);
                 break;
-                case 'compareByLastModifiedAsc':
+                case 'sortByLastModifiedAsc':
                     $("th[data-field='last_modified']").replaceWith(fragmentSortByLastModifiedDesc);
                 break;
-                case 'compareByLastModifiedDesc':
+                case 'sortByLastModifiedDesc':
                     $("th[data-field='last_modified']").replaceWith(fragmentSortByLastModifiedAsc);
                 break;
                 default:
                     console.log('sortingType ' + sortingType + 'for replaceWith switch not implemented.');
             }
 
+            /* Create anchor tags */
+            $('#table tr td:first-child').each(function() {
+                var name = $(this).html();
+                var anchor = '<a href="https://ansible.ing.net/curios/P03881-TibcoBWGlobalpurpose/' + name + '">' + name + '</a>';
+                $(this).replaceWith('<td>' + anchor + '</td>');
+            });
+
+            /* Active filter */
             var value = $('#tfSearch').val().toLowerCase();;
             $('#table > tbody > tr').filter(function() {
-              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
 
         }
 
         $(document).ready(function(){
             $(document).on('click','#btnSortByNameAsc', function() {
-                sort('compareByNameAsc');
+                sort('sortByNameAsc');
             });
 
             $(document).on('click','#btnSortByNameDesc', function() {
-                sort('compareByNameDesc');
+                sort('sortByNameDesc');
             });
 
             $(document).on('click','#btnSortBySizeAsc', function() {
-                sort('compareBySizeAsc');
+                sort('sortBySizeAsc');
             });
 
             $(document).on('click','#btnSortBySizeDesc', function() {
-                sort('compareBySizeDesc');
+                sort('sortBySizeDesc');
             });
 
             $(document).on('click','#btnSortByLastModifiedAsc', function() {
-                sort('compareByLastModifiedAsc');
+                sort('sortByLastModifiedAsc');
             });
 
             $(document).on('click','#btnSortByLastModifiedDesc', function() {
-                sort('compareByLastModifiedDesc');
+                sort('sortByLastModifiedDesc');
             });
 
             $('#tfSearch').on('keyup', function() {
@@ -124,7 +131,7 @@
             });
 
             /* Init table */
-            sort('compareByNameAsc');
+            sort('sortByNameAsc');
 
         });
 
@@ -138,19 +145,21 @@
     Test with sort
 </h1>
 
-<input class="form-control" id="tfSearch" type="text" placeholder="Search...">
-
-<table class="table table-hover table-sm" id="table">
-    <thead>
-        <tr>
-            <th data-field="name">name</th>
-            <th data-field="size">size</th>
-            <th data-field="last_modified">last_modified</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+<div class="container">
+    <input class="form-control" id="tfSearch" type="text" placeholder="Search...">
+    <br>
+    <table class="table table-hover table-sm" id="table">
+        <thead>
+            <tr>
+                <th data-field="name">name</th>
+                <th data-field="size">size</th>
+                <th data-field="last_modified">last_modified</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
 
