@@ -24,18 +24,28 @@
 </head>
 
 <body>
-<h1>
-    <a th:href="@{/}">[ home ]</a>
-    Test with sort
-</h1>
-<select id="selection">
-    <option>Content 1</option>
-    <option>Content 2</option>
-</select>
 
-<div id="replace_div">
-    Content goes here
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <h1>
+                <a th:href="@{/}">[ home ]</a>
+                Test with sort
+            </h1>
+            <select id="selection">
+                <option>Content 1</option>
+                <option>Content 2</option>
+            </select>
+        </div>
+        <div id="replace_div" class="col-md-8">
+            One of three columns
+        </div>
+    </div>
 </div>
+
+
+
+
 
 <script>
             $(document).ready(function () {
